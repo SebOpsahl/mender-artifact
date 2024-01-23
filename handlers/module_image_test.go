@@ -249,3 +249,60 @@ func TestModuleImageGetProperties(t *testing.T) {
 	_, err = augm.GetUpdateMetaData()
 	assert.Error(t, err)
 }
+
+func TestModuleImageMetaData(t *testing.T) {
+	orig := NewModuleImage("test-type")
+	augm := NewAugmentedModuleImage(orig, "test-type")
+
+	orig.metaData = map[string]interface{}{
+		"list": []map[string]string{
+			{
+				"a": "1",
+			},
+			{
+				"b": "2",
+			},
+		},
+		"version": "1.0",
+	}	
+	
+	augm.metaData = map[string]interface{}{
+		"data": [][]int{
+			{1,3,5,7,9},
+			{2,4,6,8,10},
+		},
+	}	
+
+	metaData, err := orig.GetUpdateMetaData()
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]interface{}{
+		"list": []map[string]string{
+			{
+				"a": "1",
+			},
+			{
+				"b": "2",
+			},
+		},
+		"version": "1.0",
+	}, metaData)
+
+	metaData, err = augm.GetUpdateMetaData()
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]interface{}{
+		"list": []map[string]string{
+			{
+				"a": "1",
+			},
+			{
+				"b": "2",
+			},
+		},
+		"version": "1.0",
+		"data": [][]int{
+			{1,3,5,7,9},
+			{2,4,6,8,10},
+		},
+	}, metaData)
+
+}
