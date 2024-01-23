@@ -234,11 +234,11 @@ func (img *ModuleImage) setUpdateAugmentMetaData(metaData map[string]interface{}
 	return nil
 }
 
- JSON structures
+// Copies JSON structures
 func jsonDeepCopy(src interface{}) (interface{}, error) {
 	switch item := src.(type) {
 	case map[string]interface{}:
-// Copies		dst := make(map[string]interface{})
+		dst := make(map[string]interface{})
 		for key := range item {
 			obj, err := jsonDeepCopy(item[key])
 			if err != nil {
@@ -316,6 +316,7 @@ func mergeJsonStructures(orig, override map[string]interface{}) (map[string]inte
 		}
 		merged[key] = obj
 	}
+
 	return merged, nil
 }
 

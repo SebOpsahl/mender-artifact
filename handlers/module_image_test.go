@@ -263,7 +263,7 @@ func TestModuleImageMetaData(t *testing.T) {
 				"b": "2",
 			},
 		},
-		"version": "1.0",
+		"version": 1.0,
 	}	
 	
 	augm.metaData = map[string]interface{}{
@@ -284,7 +284,7 @@ func TestModuleImageMetaData(t *testing.T) {
 				"b": "2",
 			},
 		},
-		"version": "1.0",
+		"version": 1.0,
 	}, metaData)
 
 	metaData, err = augm.GetUpdateMetaData()
@@ -298,7 +298,7 @@ func TestModuleImageMetaData(t *testing.T) {
 				"b": "2",
 			},
 		},
-		"version": "1.0",
+		"version": 1.0,
 		"data": [][]int{
 			{1,3,5,7,9},
 			{2,4,6,8,10},
